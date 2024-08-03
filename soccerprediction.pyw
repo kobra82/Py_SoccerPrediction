@@ -1,0 +1,138 @@
+from tkinter import *
+
+def clas(htd, atd):
+    list_clas=list(range(3))
+    if abs(htd[0]-atd[0])<=6:
+        list_clas[1]=1
+    else:
+        list_clas[1]=0
+    if (htd[0]<atd[0]):
+        list_clas[0]=1
+        list_clas[2]=0
+    else:
+        list_clas[2]=1
+        list_clas[0]=0
+    return list_clas
+
+def punt(htd, atd):
+    list_punt=list(range(3))
+    list_punt[0]=(htd[2]+atd[4])
+    list_punt[1]=(htd[3]+atd[3])
+    list_punt[2]=(htd[4]+atd[2])
+    return list_punt
+
+def calc_result(list_clas, list_punt):
+    list_result=list(range(3))
+    for i in range(3):
+        list_result[i]=(round((1/2)*((list_clas[i]/sum(list_clas))+(list_punt[i]/sum(list_punt))),5))
+    return list_result
+
+def calcola():
+    htd=[]
+    htd.append(int(positioncasaentry.get()))
+    htd.append(str(nomecasaentry.get()))
+    htd.append(int(wincasaentry.get()))
+    htd.append(int(nullcasaentry.get()))
+    htd.append(int(losscasaentry.get()))
+    htd.append(int(goalscoredcasaentry.get()))
+    htd.append(int(goallossescasaentry.get()))
+    atd=[]
+    atd.append(int(positiontrasentry.get()))
+    atd.append(str(nometrasentry.get()))
+    atd.append(int(wintrasentry.get()))
+    atd.append(int(nulltrasentry.get()))
+    atd.append(int(losstrasentry.get()))
+    atd.append(int(goalscoredtrasentry.get()))
+    atd.append(int(goallossestrasentry.get()))
+    out_list1=clas(htd, atd)
+    out_list2=punt(htd, atd)
+    result=calc_result(out_list1, out_list2)
+    percunolabel=Label(frame3, text="% "+str(nomecasaentry.get()))
+    percunolabel.grid(row=0, column=0)
+    percunolabel=Label(frame3, text="% "+str(nometrasentry.get()))
+    percunolabel.grid(row=0, column=2)
+    percunoentry.insert(END, str(result[0]))
+    percicsentry.insert(END, str(result[1]))
+    percdueentry.insert(END, str(result[2]))
+    
+root=Tk()
+root.geometry("328x270")
+root.resizable(False, False)
+root.title("Calculus of serie A match")
+frame1=LabelFrame(root, text="Casa")
+frame1.place(x=2, y=0)
+frame2=LabelFrame(root, text="Trasferta")
+frame2.place(x=165, y=0)
+frame3=LabelFrame(root, text="Percentuali")
+frame3.place(x=2, y=165)
+nomecasalabel=Label(frame1, text="Nome: ")
+nomecasalabel.grid(row=0, column=0)
+nomecasaentry=Entry(frame1, width=11)
+nomecasaentry.grid(row=0, column=1, padx=10)
+positioncasalabel=Label(frame1, text="Posizione: ")
+positioncasalabel.grid(row=1, column=0)
+positioncasaentry=Entry(frame1, width=11)
+positioncasaentry.grid(row=1, column=1, padx=10)
+wincasalabel=Label(frame1, text="Vinte: ")
+wincasalabel.grid(row=2, column=0)
+wincasaentry=Entry(frame1, width=11)
+wincasaentry.grid(row=2, column=1, padx=10)
+nullcasalabel=Label(frame1, text="Pareggiate: ")
+nullcasalabel.grid(row=3, column=0)
+nullcasaentry=Entry(frame1, width=11)
+nullcasaentry.grid(row=3, column=1, padx=10)
+losscasalabel=Label(frame1, text="Perse: ")
+losscasalabel.grid(row=4, column=0)
+losscasaentry=Entry(frame1, width=11)
+losscasaentry.grid(row=4, column=1, padx=10)
+goalscoredcasalabel=Label(frame1, text="Gol fatti: ")
+goalscoredcasalabel.grid(row=5, column=0)
+goalscoredcasaentry=Entry(frame1, width=11)
+goalscoredcasaentry.grid(row=5, column=1, padx=10)
+goallossescasalabel=Label(frame1, text="Gol subiti: ")
+goallossescasalabel.grid(row=6, column=0)
+goallossescasaentry=Entry(frame1, width=11)
+goallossescasaentry.grid(row=6, column=1, padx=10)
+nometraslabel=Label(frame2, text="Nome: ")
+nometraslabel.grid(row=0, column=0)
+nometrasentry=Entry(frame2, width=11)
+nometrasentry.grid(row=0, column=1, padx=10)
+positiontraslabel=Label(frame2, text="Posizione: ")
+positiontraslabel.grid(row=1, column=0)
+positiontrasentry=Entry(frame2, width=11)
+positiontrasentry.grid(row=1, column=1, padx=10)
+wintraslabel=Label(frame2, text="Vinte: ")
+wintraslabel.grid(row=2, column=0)
+wintrasentry=Entry(frame2, width=11)
+wintrasentry.grid(row=2, column=1, padx=10)
+nulltraslabel=Label(frame2, text="Pareggiate: ")
+nulltraslabel.grid(row=3, column=0)
+nulltrasentry=Entry(frame2, width=11)
+nulltrasentry.grid(row=3, column=1, padx=10)
+losstraslabel=Label(frame2, text="Perse: ")
+losstraslabel.grid(row=4, column=0)
+losstrasentry=Entry(frame2, width=11)
+losstrasentry.grid(row=4, column=1, padx=10)
+goalscoredtraslabel=Label(frame2, text="Gol fatti: ")
+goalscoredtraslabel.grid(row=5, column=0)
+goalscoredtrasentry=Entry(frame2, width=11)
+goalscoredtrasentry.grid(row=5, column=1, padx=10)
+goallossestraslabel=Label(frame2, text="Gol subiti: ")
+goallossestraslabel.grid(row=6, column=0)
+goallossestrasentry=Entry(frame2, width=11)
+goallossestrasentry.grid(row=6, column=1, padx=10)
+percunolabel=Label(frame3, text="%1")
+percunolabel.grid(row=0, column=0)
+percunoentry=Entry(frame3, width=14)
+percunoentry.grid(row=1, column=0, padx=9)
+percicslabel=Label(frame3, text="%PAREGGIO")
+percicslabel.grid(row=0, column=1)
+percicsentry=Entry(frame3, width=14)
+percicsentry.grid(row=1, column=1, padx=9)
+percduelabel=Label(frame3, text="%2")
+percduelabel.grid(row=0, column=2)
+percdueentry=Entry(frame3, width=14)
+percdueentry.grid(row=1, column=2, padx=9)
+firstbutton=Button(frame3, text="Calcola", command=calcola)
+firstbutton.grid(row=2, column=1, pady=10)
+root.mainloop()
